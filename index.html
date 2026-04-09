@@ -21,6 +21,7 @@
         :root {
             --primary-gold: #FFD700;
             --vibrant-orange: #FF8C00;
+            --silver-gradient: linear-gradient(135deg, #E0E0E0 0%, #B0BEC5 100%);
             --bright-green: #00E676;
             --bright-red: #FF1744;
             --bg-bright: #F5F7FA;
@@ -127,8 +128,8 @@
 
         .rates-row {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
         }
 
         .card {
@@ -299,7 +300,7 @@
                 </div>
                 <div class="header-text">
                     <p>Live Market Rates</p>
-                    <h1>LAHORE GOLD</h1>
+                    <h1>LAHORE BULLION</h1>
                 </div>
             </div>
             <div class="time-box">
@@ -331,6 +332,14 @@
                 <div class="card-status up">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5H7z"/></svg>
                     <span>+1.3% Today</span>
+                </div>
+            </div>
+            <div class="card" style="border-top: 5px solid #E0E0E0;">
+                <div class="card-label"><span style="color: #B0BEC5;">●</span> Silver (Tola)</div>
+                <div class="card-price" id="p-silver">Rs. 0</div>
+                <div class="card-status up" id="s-silver">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5H7z"/></svg>
+                    <span>+2.1% Today</span>
                 </div>
             </div>
         </main>
@@ -372,45 +381,88 @@
         // Chart.js Configuration
         const ctx = document.getElementById('priceChart').getContext('2d');
         const labels = ['3 Apr', '4 Apr', '5 Apr', '6 Apr', '7 Apr', '8 Apr', '9 Apr'];
-        let prices = [475000, 482000, 479000, 488000, 495000, 510000, 512000];
+        let goldPrices = [475000, 482000, 479000, 488000, 495000, 510000, 512000];
+        let silverPrices = [2850, 2920, 2890, 3100, 3150, 3250, 3300];
 
         const chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
-                datasets: [{
-                    label: '24K Price (PKR)',
-                    data: prices,
-                    borderColor: '#FF8C00',
-                    borderWidth: 5,
-                    pointBackgroundColor: '#FFFFFF',
-                    pointBorderColor: '#FF8C00',
-                    pointBorderWidth: 3,
-                    pointRadius: 6,
-                    pointHoverRadius: 9,
-                    tension: 0.4,
-                    fill: true,
-                    backgroundColor: (context) => {
-                        const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, context.chart.height);
-                        gradient.addColorStop(0, 'rgba(255, 140, 0, 0.2)');
-                        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                        return gradient;
+                datasets: [
+                    {
+                        label: '24K Gold (Tola)',
+                        data: goldPrices,
+                        borderColor: '#FF8C00',
+                        borderWidth: 5,
+                        pointBackgroundColor: '#FFFFFF',
+                        pointBorderColor: '#FF8C00',
+                        pointBorderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 9,
+                        tension: 0.4,
+                        fill: true,
+                        backgroundColor: (context) => {
+                            const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, context.chart.height);
+                            gradient.addColorStop(0, 'rgba(255, 140, 0, 0.2)');
+                            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                            return gradient;
+                        },
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Silver (Tola)',
+                        data: silverPrices,
+                        borderColor: '#94A3B8',
+                        borderWidth: 4,
+                        borderDash: [5, 5],
+                        pointBackgroundColor: '#FFFFFF',
+                        pointBorderColor: '#94A3B8',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        tension: 0.4,
+                        fill: false,
+                        yAxisID: 'y1'
                     }
-                }]
+                ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: { weight: 'bold', size: 14 },
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                },
                 scales: {
                     y: {
-                        beginAtZero: false,
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
                         grid: { color: '#F0F0F0' },
                         ticks: {
                             font: { weight: 'bold', size: 12 },
-                            color: '#6C727A',
+                            color: '#FF8C00',
                             callback: v => 'Rs ' + (v/1000).toFixed(0) + 'k'
-                        }
+                        },
+                        title: { display: true, text: 'Gold Price', font: { weight: 'bold' } }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        grid: { drawOnChartArea: false },
+                        ticks: {
+                            font: { weight: 'bold', size: 12 },
+                            color: '#64748B',
+                            callback: v => 'Rs ' + v
+                        },
+                        title: { display: true, text: 'Silver Price', font: { weight: 'bold' } }
                     },
                     x: {
                         grid: { display: false },
@@ -428,17 +480,22 @@
                 const exchangeData = await exchangeRes.json();
                 const pkrRate = exchangeData.rates.PKR || 278.50;
 
-                // Fetch Gold Spot (USD/Ounce) (Tested Working API)
+                // Fetch Gold Spot (USD/Ounce)
                 const goldRes = await fetch('https://api.gold-api.com/price/XAU', { cache: 'no-store' });
                 const goldData = await goldRes.json();
 
+                // Fetch Silver Spot (USD/Ounce)
+                const silverRes = await fetch('https://api.gold-api.com/price/XAG', { cache: 'no-store' });
+                const silverData = await silverRes.json();
+
                 // Safety check to prevent NaN
-                const spotUSD = (goldData && goldData.price) ? parseFloat(goldData.price) : 2350.00;
+                const spotGoldUSD = (goldData && goldData.price) ? parseFloat(goldData.price) : 2350.00;
+                const spotSilverUSD = (silverData && silverData.price) ? parseFloat(silverData.price) : 28.50;
 
                 // Calculation: (USD/Ounce / 31.1035 grams) * 11.6638 grams per Tola * PKR Rate
-                // Plus ~2% local market spread/premium
                 const premiumFactor = 1.02;
-                const price24k = Math.round((spotUSD / 31.1034768) * 11.6638038 * pkrRate * premiumFactor);
+                const price24k = Math.round((spotGoldUSD / 31.1034768) * 11.6638038 * pkrRate * premiumFactor);
+                const priceSilver = Math.round((spotSilverUSD / 31.1034768) * 11.6638038 * pkrRate * premiumFactor);
 
                 // Karat math: 22K is 91.6% of 24K, 21K is 87.5% of 24K
                 const price22k = Math.round(price24k * 0.9166);
@@ -448,9 +505,11 @@
                 document.getElementById('p-24k').textContent = 'Rs. ' + price24k.toLocaleString();
                 document.getElementById('p-22k').textContent = 'Rs. ' + price22k.toLocaleString();
                 document.getElementById('p-21k').textContent = 'Rs. ' + price21k.toLocaleString();
+                document.getElementById('p-silver').textContent = 'Rs. ' + priceSilver.toLocaleString();
 
                 // Update Chart
                 chart.data.datasets[0].data[6] = price24k;
+                chart.data.datasets[1].data[6] = priceSilver;
                 chart.update();
 
                 document.getElementById('sync-time').textContent = new Date().toLocaleTimeString();
@@ -464,11 +523,12 @@
 
             } catch (err) {
                 console.error("Data fetch failed:", err);
-                // Fallback to reasonable static values if network fails
+                // Fallback to reasonable static values
                 document.getElementById('p-24k').textContent = 'Rs. 514,500';
                 document.getElementById('p-22k').textContent = 'Rs. 471,600';
                 document.getElementById('p-21k').textContent = 'Rs. 450,200';
-                document.getElementById('loading').remove();
+                document.getElementById('p-silver').textContent = 'Rs. 3,350';
+                if (document.getElementById('loading')) document.getElementById('loading').remove();
             }
         }
 
