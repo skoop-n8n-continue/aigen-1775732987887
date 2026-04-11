@@ -4,7 +4,7 @@
     <link rel="manifest" href="./manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bullion Rates Lahore - Black Edition</title>
+    <title>Bullion Rates Lahore - Silver Edition</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -19,17 +19,17 @@
 
     <style>
         :root {
-            --primary-black: #121212;
-            --card-dark: #1E1E1E;
-            --accent-gold: #FFD700;
-            --accent-silver: #C0C0C0;
-            --bright-green: #00E676;
-            --bright-red: #FF1744;
-            --bg-dark: #000000;
-            --text-light: #F5F5F5;
-            --text-muted: #888888;
-            --shadow-vibrant: 0 20px 40px rgba(0, 0, 0, 0.5);
-            --border-glow: 1px solid rgba(255, 215, 0, 0.2);
+            --primary-silver: #C0C0C0;
+            --secondary-silver: #E0E0E0;
+            --card-light: #FFFFFF;
+            --accent-metallic: #707070;
+            --bright-green: #2E7D32;
+            --bright-red: #C62828;
+            --bg-silver: #F8F9FA;
+            --text-dark: #1A1A1A;
+            --text-muted: #6C757D;
+            --shadow-vibrant: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --border-silver: 1px solid rgba(192, 192, 192, 0.4);
         }
 
         * {
@@ -40,15 +40,15 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
+            background-color: var(--bg-silver);
+            color: var(--text-dark);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             background-image:
-                radial-gradient(at 0% 0%, rgba(255, 215, 0, 0.05) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(192, 192, 192, 0.05) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(192, 192, 192, 0.2) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(128, 128, 128, 0.1) 0px, transparent 50%);
         }
 
         .container {
@@ -66,12 +66,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, #1A1A1A 0%, #000000 100%);
+            background: linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%);
             padding: 1.5rem 2.5rem;
             border-radius: 1.5rem;
-            color: #FFFFFF;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-            border: var(--border-glow);
+            color: var(--text-dark);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: var(--border-silver);
         }
 
         .logo-section {
@@ -81,22 +81,22 @@
         }
 
         .logo-circle {
-            background: #1A1A1A;
+            background: #FFFFFF;
             width: 64px;
             height: 64px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(255,215,0,0.2);
-            border: 1px solid rgba(255,215,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1px solid rgba(192, 192, 192, 0.5);
         }
 
         .logo-img {
             width: 40px;
             height: 40px;
             object-fit: contain;
-            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.1));
         }
 
         .header-text h1 {
@@ -104,7 +104,7 @@
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1;
-            background: linear-gradient(to right, #FFD700, #FFA500);
+            background: linear-gradient(to right, #495057, #212529);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -114,7 +114,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            color: var(--accent-gold);
+            color: var(--accent-metallic);
             opacity: 0.8;
         }
 
@@ -126,14 +126,14 @@
             font-size: 1.8rem;
             font-weight: 800;
             line-height: 1;
-            color: var(--accent-gold);
+            color: #212529;
         }
 
         #date {
             font-size: 1rem;
             font-weight: 600;
             opacity: 0.8;
-            color: #FFFFFF;
+            color: #495057;
         }
 
         .rates-row {
@@ -143,11 +143,11 @@
         }
 
         .card {
-            background: var(--card-dark);
+            background: var(--card-light);
             border-radius: 1.5rem;
             padding: 2rem;
             box-shadow: var(--shadow-vibrant);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -158,7 +158,7 @@
 
         .card:hover {
             transform: translateY(-5px);
-            border-color: rgba(255, 215, 0, 0.3);
+            border-color: rgba(192, 192, 192, 0.8);
         }
 
         .card::after {
@@ -168,7 +168,7 @@
             right: 0;
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, transparent 50%, rgba(255, 215, 0, 0.05) 50%);
+            background: linear-gradient(135deg, transparent 50%, rgba(192, 192, 192, 0.1) 50%);
             border-radius: 0 0 0 100%;
         }
 
@@ -181,14 +181,15 @@
             gap: 0.5rem;
         }
 
-        .dot-24k { color: #FFD700; }
-        .dot-22k { color: #FFC107; }
-        .dot-21k { color: #FFB300; }
+        .dot-24k { color: #DAA520; }
+        .dot-22k { color: #CD7F32; }
+        .dot-21k { color: #B8860B; }
+        .dot-silver { color: #A9A9A9; }
 
         .card-price {
             font-size: 3.5rem;
             font-weight: 800;
-            color: #FFFFFF;
+            color: var(--text-dark);
             letter-spacing: -0.04em;
         }
 
@@ -203,19 +204,19 @@
             width: fit-content;
         }
 
-        .up { color: #00E676; background: rgba(0, 230, 118, 0.1); }
-        .down { color: #FF1744; background: rgba(255, 23, 68, 0.1); }
+        .up { color: var(--bright-green); background: rgba(46, 125, 50, 0.08); }
+        .down { color: var(--bright-red); background: rgba(198, 40, 40, 0.08); }
 
         .chart-section {
             flex: 1;
-            background: var(--card-dark);
+            background: var(--card-light);
             border-radius: 1.5rem;
             padding: 2rem;
             box-shadow: var(--shadow-vibrant);
             display: flex;
             flex-direction: column;
             min-height: 350px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .chart-top {
@@ -228,12 +229,12 @@
         .chart-top h2 {
             font-size: 1.5rem;
             font-weight: 800;
-            color: #FFFFFF;
+            color: var(--text-dark);
         }
 
         .market-badge {
-            background: rgba(255, 215, 0, 0.1);
-            color: #FFD700;
+            background: rgba(192, 192, 192, 0.15);
+            color: #495057;
             padding: 0.5rem 1rem;
             border-radius: 2rem;
             font-weight: 700;
@@ -241,13 +242,13 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(192, 192, 192, 0.4);
         }
 
         .live-dot {
             width: 8px;
             height: 8px;
-            background: #FFD700;
+            background: #707070;
             border-radius: 50%;
             animation: blink 1.5s infinite;
         }
@@ -259,9 +260,9 @@
         }
 
         footer {
-            background: #0A0A0A;
+            background: #FFFFFF;
             padding: 1.2rem 3rem;
-            border-top: 1px solid #1A1A1A;
+            border-top: 1px solid #E9ECEF;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -271,19 +272,19 @@
         }
 
         .update-tag {
-            background: #333333;
-            color: var(--accent-gold);
+            background: #F8F9FA;
+            color: #495057;
             padding: 0.2rem 0.8rem;
             border-radius: 1rem;
             font-size: 0.8rem;
             margin-left: 0.5rem;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            border: 1px solid rgba(192, 192, 192, 0.5);
         }
 
         #loading {
             position: fixed;
             inset: 0;
-            background: #000000;
+            background: #F8F9FA;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -294,8 +295,8 @@
         .spinner {
             width: 50px;
             height: 50px;
-            border: 5px solid #1A1A1A;
-            border-top: 5px solid var(--accent-gold);
+            border: 5px solid #E9ECEF;
+            border-top: 5px solid #707070;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -355,7 +356,7 @@
                 </div>
             </div>
             <div class="card" style="border-top: 5px solid #C0C0C0;">
-                <div class="card-label"><span style="color: #C0C0C0;">●</span> Silver (Tola)</div>
+                <div class="card-label"><span class="dot-silver">●</span> Silver (Tola)</div>
                 <div class="card-price" id="p-silver">Rs. 0</div>
                 <div class="card-status up" id="s-silver">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5H7z"/></svg>
@@ -420,10 +421,10 @@
                     {
                         label: '24K Gold (Tola)',
                         data: goldPrices,
-                        borderColor: '#FFD700',
+                        borderColor: '#707070',
                         borderWidth: 5,
                         pointBackgroundColor: '#FFFFFF',
-                        pointBorderColor: '#FFD700',
+                        pointBorderColor: '#707070',
                         pointBorderWidth: 3,
                         pointRadius: 6,
                         pointHoverRadius: 9,
@@ -431,8 +432,8 @@
                         fill: true,
                         backgroundColor: (context) => {
                             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, context.chart.height);
-                            gradient.addColorStop(0, 'rgba(255, 215, 0, 0.15)');
-                            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                            gradient.addColorStop(0, 'rgba(112, 112, 112, 0.1)');
+                            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
                             return gradient;
                         },
                         yAxisID: 'y'
@@ -440,11 +441,11 @@
                     {
                         label: 'Silver (Tola)',
                         data: silverPrices,
-                        borderColor: '#C0C0C0',
+                        borderColor: '#A9A9A9',
                         borderWidth: 4,
                         borderDash: [5, 5],
                         pointBackgroundColor: '#FFFFFF',
-                        pointBorderColor: '#C0C0C0',
+                        pointBorderColor: '#A9A9A9',
                         pointBorderWidth: 2,
                         pointRadius: 4,
                         tension: 0.4,
@@ -462,7 +463,7 @@
                         position: 'top',
                         labels: {
                             font: { weight: 'bold', size: 14 },
-                            color: '#FFFFFF',
+                            color: '#1A1A1A',
                             usePointStyle: true,
                             padding: 20
                         }
@@ -473,13 +474,13 @@
                         type: 'linear',
                         display: true,
                         position: 'left',
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.05)' },
                         ticks: {
                             font: { weight: 'bold', size: 12 },
-                            color: '#FFD700',
+                            color: '#495057',
                             callback: v => 'Rs ' + (v/1000).toFixed(0) + 'k'
                         },
-                        title: { display: true, text: 'Gold Price', color: '#FFD700', font: { weight: 'bold' } }
+                        title: { display: true, text: 'Gold Price', color: '#495057', font: { weight: 'bold' } }
                     },
                     y1: {
                         type: 'linear',
@@ -488,14 +489,14 @@
                         grid: { drawOnChartArea: false },
                         ticks: {
                             font: { weight: 'bold', size: 12 },
-                            color: '#C0C0C0',
+                            color: '#6C757D',
                             callback: v => 'Rs ' + v
                         },
-                        title: { display: true, text: 'Silver Price', color: '#C0C0C0', font: { weight: 'bold' } }
+                        title: { display: true, text: 'Silver Price', color: '#6C757D', font: { weight: 'bold' } }
                     },
                     x: {
                         grid: { display: false },
-                        ticks: { font: { weight: 'bold', size: 12 }, color: '#888888' }
+                        ticks: { font: { weight: 'bold', size: 12 }, color: '#6C757D' }
                     }
                 }
             }
