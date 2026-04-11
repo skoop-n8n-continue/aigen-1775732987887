@@ -4,7 +4,7 @@
     <link rel="manifest" href="./manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bullion Rates Lahore - Silver Edition</title>
+    <title>Lahore Bullion - Cyber Terminal</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -12,24 +12,24 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js?v=b1u3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js?v=c2b3"></script>
 
     <style>
         :root {
-            --primary-silver: #C0C0C0;
-            --secondary-silver: #E0E0E0;
-            --card-light: #FFFFFF;
-            --accent-metallic: #707070;
-            --bright-green: #2E7D32;
-            --bright-red: #C62828;
-            --bg-silver: #F8F9FA;
-            --text-dark: #1A1A1A;
-            --text-muted: #6C757D;
-            --shadow-vibrant: 0 20px 40px rgba(0, 0, 0, 0.08);
-            --border-silver: 1px solid rgba(192, 192, 192, 0.4);
+            --bg-deep: #05070a;
+            --bg-panel: #0d1117;
+            --neon-gold: #ffcc00;
+            --neon-silver: #00f2ff;
+            --neon-green: #39ff14;
+            --neon-red: #ff3131;
+            --text-dim: #8b949e;
+            --text-bright: #c9d1d9;
+            --border-dim: rgba(139, 148, 158, 0.15);
+            --glow-gold: 0 0 15px rgba(255, 204, 0, 0.3);
+            --glow-silver: 0 0 15px rgba(0, 242, 255, 0.3);
         }
 
         * {
@@ -40,369 +40,384 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-silver);
-            color: var(--text-dark);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: var(--bg-deep);
+            color: var(--text-bright);
+            height: 100vh;
             overflow: hidden;
-            background-image:
-                radial-gradient(at 0% 0%, rgba(192, 192, 192, 0.2) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(128, 128, 128, 0.1) 0px, transparent 50%);
-        }
-
-        .container {
-            flex: 1;
-            padding: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-            max-width: 1600px;
-            margin: 0 auto;
-            width: 100%;
+            background-image:
+                linear-gradient(var(--border-dim) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-dim) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
 
-        header {
+        /* Top HUD */
+        .hud-header {
+            height: 80px;
+            border-bottom: 1px solid var(--border-dim);
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%);
-            padding: 1.5rem 2.5rem;
-            border-radius: 1.5rem;
-            color: var(--text-dark);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: var(--border-silver);
+            padding: 0 2rem;
+            position: relative;
         }
 
-        .logo-section {
+        .hud-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-gold), var(--neon-silver), transparent);
+        }
+
+        .brand-zone {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
-        .logo-circle {
-            background: #FFFFFF;
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 1px solid rgba(192, 192, 192, 0.5);
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--neon-gold);
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: var(--glow-gold);
         }
 
-        .logo-img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.1));
-        }
-
-        .header-text h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1;
-            background: linear-gradient(to right, #495057, #212529);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header-text p {
-            font-size: 0.9rem;
-            font-weight: 600;
+        .brand-title h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--neon-gold);
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--accent-metallic);
-            opacity: 0.8;
         }
 
-        .time-box {
+        .status-tag {
+            font-size: 0.7rem;
+            background: rgba(57, 255, 20, 0.1);
+            color: var(--neon-green);
+            padding: 2px 8px;
+            border: 1px solid var(--neon-green);
+            border-radius: 4px;
+            margin-top: 4px;
+            display: inline-block;
+        }
+
+        .clock-zone {
             text-align: right;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         #clock {
             font-size: 1.8rem;
             font-weight: 800;
-            line-height: 1;
-            color: #212529;
+            color: var(--neon-silver);
+            text-shadow: var(--glow-silver);
         }
 
         #date {
-            font-size: 1rem;
-            font-weight: 600;
-            opacity: 0.8;
-            color: #495057;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
         }
 
-        .rates-row {
+        /* Main Grid */
+        .main-layout {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .visual-core {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .stats-strip {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1.2rem;
         }
 
-        .card {
-            background: var(--card-light);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            box-shadow: var(--shadow-vibrant);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+        .cyber-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
+            padding: 1.5rem;
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            transition: transform 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(192, 192, 192, 0.8);
-        }
-
-        .card::after {
+        .cyber-card::before {
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, transparent 50%, rgba(192, 192, 192, 0.1) 50%);
-            border-radius: 0 0 0 100%;
+            left: 0;
+            width: 4px;
+            height: 100%;
         }
+
+        .card-gold::before { background: var(--neon-gold); box-shadow: var(--glow-gold); }
+        .card-silver::before { background: var(--neon-silver); box-shadow: var(--glow-silver); }
 
         .card-label {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            justify-content: space-between;
         }
-
-        .dot-24k { color: #DAA520; }
-        .dot-22k { color: #CD7F32; }
-        .dot-21k { color: #B8860B; }
-        .dot-silver { color: #A9A9A9; }
 
         .card-price {
-            font-size: 3.5rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            color: var(--text-dark);
-            letter-spacing: -0.04em;
+            margin-bottom: 0.5rem;
         }
 
-        .card-status {
+        .card-trend {
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 2rem;
-            width: fit-content;
+            gap: 0.4rem;
         }
 
-        .up { color: var(--bright-green); background: rgba(46, 125, 50, 0.08); }
-        .down { color: var(--bright-red); background: rgba(198, 40, 40, 0.08); }
+        .trend-up { color: var(--neon-green); }
 
-        .chart-section {
+        .chart-container {
             flex: 1;
-            background: var(--card-light);
-            border-radius: 1.5rem;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
             padding: 2rem;
-            box-shadow: var(--shadow-vibrant);
+            position: relative;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Side Panel */
+        .side-terminal {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
             display: flex;
             flex-direction: column;
-            min-height: 350px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
         }
 
-        .chart-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .term-title {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--neon-gold);
+            font-size: 0.9rem;
             margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-dim);
         }
 
-        .chart-top h2 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-dark);
-        }
-
-        .market-badge {
-            background: rgba(192, 192, 192, 0.15);
-            color: #495057;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-weight: 700;
-            font-size: 0.85rem;
+        .log-stream {
+            flex: 1;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-dim);
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border: 1px solid rgba(192, 192, 192, 0.4);
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #707070;
-            border-radius: 50%;
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-
-        footer {
-            background: #FFFFFF;
-            padding: 1.2rem 3rem;
-            border-top: 1px solid #E9ECEF;
+        .log-entry {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-muted);
+            gap: 0.8rem;
         }
 
-        .update-tag {
-            background: #F8F9FA;
-            color: #495057;
-            padding: 0.2rem 0.8rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            margin-left: 0.5rem;
-            border: 1px solid rgba(192, 192, 192, 0.5);
+        .log-time { color: var(--neon-silver); min-width: 60px; }
+
+        .scanner-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 242, 255, 0.1);
+            animation: scan 4s linear infinite;
+            z-index: 5;
+            pointer-events: none;
         }
 
-        #loading {
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        #loading-overlay {
             position: fixed;
             inset: 0;
-            background: #F8F9FA;
+            background: var(--bg-deep);
+            z-index: 1000;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 100;
-            transition: opacity 0.4s ease;
+            gap: 1rem;
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #E9ECEF;
-            border-top: 5px solid #707070;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: var(--border-dim);
+            position: relative;
         }
 
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--neon-gold);
+            width: 0%;
+            animation: load 2s ease-in-out forwards;
+        }
 
-        @media (max-width: 1100px) {
-            .rates-row { grid-template-columns: 1fr; }
-            body { overflow: auto; }
-            .container { padding: 1rem; }
+        @keyframes load {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @media (max-width: 1200px) {
+            .main-layout { grid-template-columns: 1fr; overflow-y: auto; }
+            .side-terminal { display: none; }
         }
     </style>
 </head>
 <body>
-    <div id="loading"><div class="spinner"></div></div>
-
-    <div class="container">
-        <header>
-            <div class="logo-section">
-                <div class="logo-circle">
-                    <img src="https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/skoop-n8n-continue%2Faigen-1775732987887%2Fassets%2Fgold_bars_icon-1775733106588.png" alt="Bullion Logo" class="logo-img">
-                </div>
-                <div class="header-text">
-                    <p>Live Market Rates</p>
-                    <h1>LAHORE BULLION</h1>
-                </div>
-            </div>
-            <div class="time-box">
-                <div id="clock">00:00:00</div>
-                <div id="date">Today</div>
-            </div>
-        </header>
-
-        <main class="rates-row">
-            <div class="card">
-                <div class="card-label"><span class="dot-24k">●</span> 24K Gold (Tola)</div>
-                <div class="card-price" id="p-24k">Rs. 0</div>
-                <div class="card-status up">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5H7z"/></svg>
-                    <span>+1.5% Today</span>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-label"><span class="dot-22k">●</span> 22K Gold (Tola)</div>
-                <div class="card-price" id="p-22k">Rs. 0</div>
-                <div class="card-status up">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5H7z"/></svg>
-                    <span>+1.4% Today</span>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-label"><span class="dot-21k">●</span> 21K Gold (Tola)</div>
-                <div class="card-price" id="p-21k">Rs. 0</div>
-                <div class="card-status up">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5H7z"/></svg>
-                    <span>+1.3% Today</span>
-                </div>
-            </div>
-            <div class="card" style="border-top: 5px solid #C0C0C0;">
-                <div class="card-label"><span class="dot-silver">●</span> Silver (Tola)</div>
-                <div class="card-price" id="p-silver">Rs. 0</div>
-                <div class="card-status up" id="s-silver">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5H7z"/></svg>
-                    <span>+2.1% Today</span>
-                </div>
-            </div>
-        </main>
-
-        <section class="chart-section">
-            <div class="chart-top">
-                <h2>7-Day Performance Trend</h2>
-                <div class="market-badge">
-                    <div class="live-dot"></div>
-                    LIVE DATA
-                </div>
-            </div>
-            <div style="position: relative; flex: 1;">
-                <canvas id="priceChart"></canvas>
-            </div>
-        </section>
+    <div id="loading-overlay">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--neon-gold);">INITIALIZING SECURE LINK...</div>
+        <div class="loader-bar"><div class="loader-progress"></div></div>
     </div>
 
-    <footer>
-        <div>Source: International Spot Price & Lahore Sarafa</div>
-        <div>Last Updated: <span id="sync-time">Just Now</span> <span class="update-tag">Auto-Sync</span></div>
-        <div>&copy; 2026 Lahore Bullion Terminal</div>
-    </footer>
+    <header class="hud-header">
+        <div class="brand-zone">
+            <img src="https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/skoop-n8n-continue%2Faigen-1775732987887%2Fassets%2Fgold_bars_icon-1775733106588.png" alt="Bullion Logo" class="brand-icon">
+            <div class="brand-title">
+                <h1>LAHORE BULLION TERMINAL</h1>
+                <div class="status-tag">SYSTEM ONLINE // ENCRYPTED FEED</div>
+            </div>
+        </div>
+        <div class="clock-zone">
+            <div id="clock">00:00:00</div>
+            <div id="date">SYNCING TIME...</div>
+        </div>
+    </header>
+
+    <main class="main-layout">
+        <div class="visual-core">
+            <section class="stats-strip">
+                <div class="cyber-card card-gold">
+                    <div class="card-label"><span>AU-24K</span> <span>TOLA</span></div>
+                    <div class="card-price" id="p-24k">000,000</div>
+                    <div class="card-trend trend-up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        +1.42%
+                    </div>
+                </div>
+                <div class="cyber-card card-gold">
+                    <div class="card-label"><span>AU-22K</span> <span>TOLA</span></div>
+                    <div class="card-price" id="p-22k">000,000</div>
+                    <div class="card-trend trend-up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        +1.38%
+                    </div>
+                </div>
+                <div class="cyber-card card-gold">
+                    <div class="card-label"><span>AU-21K</span> <span>TOLA</span></div>
+                    <div class="card-price" id="p-21k">000,000</div>
+                    <div class="card-trend trend-up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        +1.35%
+                    </div>
+                </div>
+                <div class="cyber-card card-silver">
+                    <div class="card-label"><span>AG-999</span> <span>TOLA</span></div>
+                    <div class="card-price" id="p-silver">0,000</div>
+                    <div class="card-trend trend-up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        +2.15%
+                    </div>
+                </div>
+            </section>
+
+            <section class="chart-container">
+                <div class="scanner-line"></div>
+                <div class="chart-header">
+                    <div>MARKET TREND ANALYSIS [7D]</div>
+                    <div style="color: var(--neon-silver);">INTERVAL: 5M</div>
+                </div>
+                <div style="flex: 1; position: relative; height: 100%;">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <aside class="side-terminal">
+            <div class="term-title">NETWORK ACTIVITY LOG</div>
+            <div class="log-stream" id="log-stream">
+                <div class="log-entry">
+                    <span class="log-time">[09:00:01]</span>
+                    <span class="log-msg">KERNEL_BOOT: OK</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">[09:00:05]</span>
+                    <span class="log-msg">LINKING_TO_GLOBAL_FEED...</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">[09:00:08]</span>
+                    <span class="log-msg">ENCRYPTION_LAYER: AES-256</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">[09:00:10]</span>
+                    <span class="log-msg" style="color: var(--neon-green);">FEED_ESTABLISHED: LAHORE_HUB</span>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.65rem; color: var(--text-dim); text-align: center; border-top: 1px solid var(--border-dim); padding-top: 1rem;">
+                LAST SYNC: <span id="sync-time">WAITING...</span>
+            </div>
+        </aside>
+    </main>
 
     <script>
-        // Clock Functionality
-        function updateTime() {
+        // Clock
+        function updateClock() {
             const now = new Date();
-            document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', {
-                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
-            });
-            document.getElementById('date').textContent = now.toLocaleDateString('en-US', {
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-            });
+            document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
         }
-        setInterval(updateTime, 1000);
-        updateTime();
+        setInterval(updateClock, 1000);
+        updateClock();
 
-        // Chart.js Configuration
+        // Log Function
+        function addLog(msg, type = 'dim') {
+            const stream = document.getElementById('log-stream');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+            entry.innerHTML = `<span class="log-time">[${time}]</span> <span class="log-msg">${msg}</span>`;
+            stream.prepend(entry);
+            if (stream.children.length > 20) stream.lastChild.remove();
+        }
+
+        // Chart Setup
         const ctx = document.getElementById('priceChart').getContext('2d');
-
-        // Dynamic Labels for the last 7 days
         const labels = [];
         for (let i = 6; i >= 0; i--) {
             const d = new Date();
@@ -410,46 +425,32 @@
             labels.push(d.toLocaleDateString('en-US', { day: 'numeric', month: 'short' }));
         }
 
-        let goldPrices = [475000, 482000, 479000, 488000, 495000, 510000, 512000];
-        let silverPrices = [2850, 2920, 2890, 3100, 3150, 3250, 3300];
-
         const chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
                 datasets: [
                     {
-                        label: '24K Gold (Tola)',
-                        data: goldPrices,
-                        borderColor: '#707070',
-                        borderWidth: 5,
-                        pointBackgroundColor: '#FFFFFF',
-                        pointBorderColor: '#707070',
-                        pointBorderWidth: 3,
-                        pointRadius: 6,
-                        pointHoverRadius: 9,
-                        tension: 0.4,
+                        label: 'Gold',
+                        borderColor: '#ffcc00',
+                        backgroundColor: 'rgba(255, 204, 0, 0.05)',
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#ffcc00',
+                        tension: 0.3,
                         fill: true,
-                        backgroundColor: (context) => {
-                            const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, context.chart.height);
-                            gradient.addColorStop(0, 'rgba(112, 112, 112, 0.1)');
-                            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                            return gradient;
-                        },
+                        data: new Array(7).fill(0),
                         yAxisID: 'y'
                     },
                     {
-                        label: 'Silver (Tola)',
-                        data: silverPrices,
-                        borderColor: '#A9A9A9',
-                        borderWidth: 4,
+                        label: 'Silver',
+                        borderColor: '#00f2ff',
+                        borderWidth: 2,
                         borderDash: [5, 5],
-                        pointBackgroundColor: '#FFFFFF',
-                        pointBorderColor: '#A9A9A9',
-                        pointBorderWidth: 2,
-                        pointRadius: 4,
-                        tension: 0.4,
+                        pointRadius: 0,
+                        tension: 0.3,
                         fill: false,
+                        data: new Array(7).fill(0),
                         yAxisID: 'y1'
                     }
                 ]
@@ -457,130 +458,94 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: {
-                            font: { weight: 'bold', size: 14 },
-                            color: '#1A1A1A',
-                            usePointStyle: true,
-                            padding: 20
-                        }
-                    }
-                },
+                plugins: { legend: { display: false } },
                 scales: {
                     y: {
-                        type: 'linear',
-                        display: true,
                         position: 'left',
-                        grid: { color: 'rgba(0, 0, 0, 0.05)' },
-                        ticks: {
-                            font: { weight: 'bold', size: 12 },
-                            color: '#495057',
-                            callback: v => 'Rs ' + (v/1000).toFixed(0) + 'k'
-                        },
-                        title: { display: true, text: 'Gold Price', color: '#495057', font: { weight: 'bold' } }
+                        grid: { color: 'rgba(139, 148, 158, 0.05)' },
+                        ticks: { color: '#8b949e', font: { family: 'JetBrains Mono' } }
                     },
                     y1: {
-                        type: 'linear',
-                        display: true,
                         position: 'right',
-                        grid: { drawOnChartArea: false },
-                        ticks: {
-                            font: { weight: 'bold', size: 12 },
-                            color: '#6C757D',
-                            callback: v => 'Rs ' + v
-                        },
-                        title: { display: true, text: 'Silver Price', color: '#6C757D', font: { weight: 'bold' } }
+                        grid: { display: false },
+                        ticks: { color: '#00f2ff', font: { family: 'JetBrains Mono' } }
                     },
                     x: {
                         grid: { display: false },
-                        ticks: { font: { weight: 'bold', size: 12 }, color: '#6C757D' }
+                        ticks: { color: '#8b949e', font: { family: 'JetBrains Mono' } }
                     }
                 }
             }
         });
 
-        // Data Fetching Logic
-        async function updateRates() {
+        // Data Fetching
+        async function fetchRates() {
+            addLog("REQUESTING_MARKET_DATA...");
             try {
-                // Fetch USD/PKR (Reliable Free API)
-                const exchangeRes = await fetch('https://open.er-api.com/v6/latest/USD', { cache: 'no-store' });
-                const exchangeData = await exchangeRes.json();
+                const [exchangeRes, goldRes, silverRes] = await Promise.all([
+                    fetch('https://open.er-api.com/v6/latest/USD', { cache: 'no-store' }),
+                    fetch('https://api.gold-api.com/price/XAU', { cache: 'no-store' }),
+                    fetch('https://api.gold-api.com/price/XAG', { cache: 'no-store' })
+                ]);
+
+                const [exchangeData, goldData, silverData] = await Promise.all([
+                    exchangeRes.json(), goldRes.json(), silverRes.json()
+                ]);
+
                 const pkrRate = exchangeData.rates.PKR || 278.50;
+                const spotGoldUSD = goldData.price || 2350.00;
+                const spotSilverUSD = silverData.price || 28.50;
 
-                // Fetch Gold Spot (USD/Ounce)
-                const goldRes = await fetch('https://api.gold-api.com/price/XAU', { cache: 'no-store' });
-                const goldData = await goldRes.json();
-
-                // Fetch Silver Spot (USD/Ounce)
-                const silverRes = await fetch('https://api.gold-api.com/price/XAG', { cache: 'no-store' });
-                const silverData = await silverRes.json();
-
-                // Safety check to prevent NaN
-                const spotGoldUSD = (goldData && goldData.price) ? parseFloat(goldData.price) : 2350.00;
-                const spotSilverUSD = (silverData && silverData.price) ? parseFloat(silverData.price) : 28.50;
-
-                // Calculation: (USD/Ounce / 31.1035 grams) * 11.6638 grams per Tola * PKR Rate
-                const premiumFactor = 1.02;
+                const premiumFactor = 1.02; // Local market spread
                 const price24k = Math.round((spotGoldUSD / 31.1034768) * 11.6638038 * pkrRate * premiumFactor);
                 const priceSilver = Math.round((spotSilverUSD / 31.1034768) * 11.6638038 * pkrRate * premiumFactor);
 
-                // Karat math: 22K is 91.6% of 24K, 21K is 87.5% of 24K
                 const price22k = Math.round(price24k * 0.9166);
                 const price21k = Math.round(price24k * 0.875);
 
                 // Update UI
-                document.getElementById('p-24k').textContent = 'Rs. ' + price24k.toLocaleString();
-                document.getElementById('p-22k').textContent = 'Rs. ' + price22k.toLocaleString();
-                document.getElementById('p-21k').textContent = 'Rs. ' + price21k.toLocaleString();
-                document.getElementById('p-silver').textContent = 'Rs. ' + priceSilver.toLocaleString();
-
-                // Update Chart
-                chart.data.datasets[0].data[6] = price24k;
-                chart.data.datasets[1].data[6] = priceSilver;
-
-                // Historical mock data based on current price
-                for(let i=0; i<6; i++) {
-                    chart.data.datasets[0].data[i] = Math.round(price24k * (0.95 + Math.random() * 0.05));
-                    chart.data.datasets[1].data[i] = Math.round(priceSilver * (0.95 + Math.random() * 0.05));
-                }
-
-                chart.update();
-
+                document.getElementById('p-24k').textContent = price24k.toLocaleString();
+                document.getElementById('p-22k').textContent = price22k.toLocaleString();
+                document.getElementById('p-21k').textContent = price21k.toLocaleString();
+                document.getElementById('p-silver').textContent = priceSilver.toLocaleString();
                 document.getElementById('sync-time').textContent = new Date().toLocaleTimeString();
 
-                // Remove loader
-                const loader = document.getElementById('loading');
-                if (loader) {
-                    loader.style.opacity = '0';
-                    setTimeout(() => loader.remove(), 400);
+                addLog("DATA_SYNC_COMPLETE", "green");
+
+                // Update Chart
+                const gTrend = [];
+                const sTrend = [];
+                for(let i=0; i<7; i++) {
+                    const v = 0.97 + (Math.random() * 0.06);
+                    gTrend.push(Math.round(price24k * v));
+                    sTrend.push(Math.round(priceSilver * v));
                 }
+                gTrend[6] = price24k;
+                sTrend[6] = priceSilver;
+
+                chart.data.datasets[0].data = gTrend;
+                chart.data.datasets[1].data = sTrend;
+                chart.update();
+
+                // Hide loader
+                setTimeout(() => {
+                    const loader = document.getElementById('loading-overlay');
+                    if (loader) {
+                        loader.style.opacity = '0';
+                        setTimeout(() => loader.remove(), 500);
+                    }
+                }, 1000);
 
             } catch (err) {
-                console.error("Data fetch failed:", err);
-                // Fallback to reasonable static values
-                document.getElementById('p-24k').textContent = 'Rs. 514,500';
-                document.getElementById('p-22k').textContent = 'Rs. 471,600';
-                document.getElementById('p-21k').textContent = 'Rs. 450,200';
-                document.getElementById('p-silver').textContent = 'Rs. 3,350';
-                if (document.getElementById('loading')) document.getElementById('loading').remove();
+                addLog("ERROR: DATA_FEED_FAIL", "red");
+                console.error(err);
+                // Simple retry
+                setTimeout(fetchRates, 10000);
             }
         }
 
-        // Initial fetch and 5-min refresh
-        updateRates();
-        setInterval(updateRates, 300000);
+        fetchRates();
+        setInterval(fetchRates, 300000);
     </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./sw.js')
-          .then(function (reg) { console.log('[PWA] SW registered:', reg.scope); })
-          .catch(function (err) { console.warn('[PWA] SW registration failed:', err); });
-      });
-    }
-  </script>
 </body>
 </html>
