@@ -4,7 +4,7 @@
     <link rel="manifest" href="./manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bullion Rates Lahore - Blue Edition</title>
+    <title>Bullion Rates Lahore - Green Edition</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -19,16 +19,16 @@
 
     <style>
         :root {
-            --primary-blue: #007BFF;
-            --vibrant-blue: #00C6FF;
+            --primary-green: #27AE60;
+            --vibrant-green: #2ECC71;
             --silver-gradient: linear-gradient(135deg, #E0E0E0 0%, #B0BEC5 100%);
             --bright-green: #00E676;
             --bright-red: #FF1744;
-            --bg-bright: #F0F4F8;
+            --bg-bright: #F1F9F1;
             --card-white: #FFFFFF;
-            --text-dark: #1A2B3C;
-            --text-muted: #5A6A7A;
-            --shadow-vibrant: 0 20px 40px rgba(0, 123, 255, 0.15);
+            --text-dark: #1A3C2B;
+            --text-muted: #5A7A6A;
+            --shadow-vibrant: 0 20px 40px rgba(39, 174, 96, 0.15);
         }
 
         * {
@@ -46,8 +46,8 @@
             flex-direction: column;
             overflow: hidden;
             background-image:
-                radial-gradient(at 0% 0%, rgba(0, 123, 255, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(0, 198, 255, 0.08) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(39, 174, 96, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(46, 204, 113, 0.08) 0px, transparent 50%);
         }
 
         .container {
@@ -65,11 +65,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, #007BFF 0%, #00C6FF 100%);
+            background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%);
             padding: 1.5rem 2.5rem;
             border-radius: 1.5rem;
             color: #FFFFFF;
-            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3);
         }
 
         .logo-section {
@@ -137,7 +137,7 @@
             border-radius: 1.5rem;
             padding: 2rem;
             box-shadow: var(--shadow-vibrant);
-            border: 1px solid rgba(0, 123, 255, 0.1);
+            border: 1px solid rgba(39, 174, 96, 0.1);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -152,7 +152,7 @@
             right: 0;
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, transparent 50%, rgba(0, 123, 255, 0.05) 50%);
+            background: linear-gradient(135deg, transparent 50%, rgba(39, 174, 96, 0.05) 50%);
             border-radius: 0 0 0 100%;
         }
 
@@ -165,9 +165,9 @@
             gap: 0.5rem;
         }
 
-        .dot-24k { color: #007BFF; }
-        .dot-22k { color: #5B9BD5; }
-        .dot-21k { color: #8DB4E2; }
+        .dot-24k { color: #27AE60; }
+        .dot-22k { color: #2ECC71; }
+        .dot-21k { color: #A9DFBF; }
 
         .card-price {
             font-size: 3.5rem;
@@ -214,8 +214,8 @@
         }
 
         .market-badge {
-            background: #E3F2FD;
-            color: #1976D2;
+            background: #E8F5E9;
+            color: #2E7D32;
             padding: 0.5rem 1rem;
             border-radius: 2rem;
             font-weight: 700;
@@ -228,7 +228,7 @@
         .live-dot {
             width: 8px;
             height: 8px;
-            background: #1976D2;
+            background: #2E7D32;
             border-radius: 50%;
             animation: blink 1.5s infinite;
         }
@@ -252,7 +252,7 @@
         }
 
         .update-tag {
-            background: var(--primary-blue);
+            background: var(--primary-green);
             color: white;
             padding: 0.2rem 0.8rem;
             border-radius: 1rem;
@@ -275,7 +275,7 @@
             width: 50px;
             height: 50px;
             border: 5px solid #F3F3F3;
-            border-top: 5px solid var(--primary-blue);
+            border-top: 5px solid var(--primary-green);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -334,8 +334,8 @@
                     <span>+1.3% Today</span>
                 </div>
             </div>
-            <div class="card" style="border-top: 5px solid #00C6FF;">
-                <div class="card-label"><span style="color: #5B9BD5;">●</span> Silver (Tola)</div>
+            <div class="card" style="border-top: 5px solid #2ECC71;">
+                <div class="card-label"><span style="color: #27AE60;">●</span> Silver (Tola)</div>
                 <div class="card-price" id="p-silver">Rs. 0</div>
                 <div class="card-status up" id="s-silver">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5H7z"/></svg>
@@ -392,10 +392,10 @@
                     {
                         label: '24K Gold (Tola)',
                         data: goldPrices,
-                        borderColor: '#007BFF',
+                        borderColor: '#27AE60',
                         borderWidth: 5,
                         pointBackgroundColor: '#FFFFFF',
-                        pointBorderColor: '#007BFF',
+                        pointBorderColor: '#27AE60',
                         pointBorderWidth: 3,
                         pointRadius: 6,
                         pointHoverRadius: 9,
@@ -403,7 +403,7 @@
                         fill: true,
                         backgroundColor: (context) => {
                             const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, context.chart.height);
-                            gradient.addColorStop(0, 'rgba(0, 123, 255, 0.2)');
+                            gradient.addColorStop(0, 'rgba(39, 174, 96, 0.2)');
                             gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
                             return gradient;
                         },
@@ -412,11 +412,11 @@
                     {
                         label: 'Silver (Tola)',
                         data: silverPrices,
-                        borderColor: '#5B9BD5',
+                        borderColor: '#2ECC71',
                         borderWidth: 4,
                         borderDash: [5, 5],
                         pointBackgroundColor: '#FFFFFF',
-                        pointBorderColor: '#5B9BD5',
+                        pointBorderColor: '#2ECC71',
                         pointBorderWidth: 2,
                         pointRadius: 4,
                         tension: 0.4,
@@ -444,10 +444,10 @@
                         type: 'linear',
                         display: true,
                         position: 'left',
-                        grid: { color: '#E8F1F8' },
+                        grid: { color: '#E8F5E9' },
                         ticks: {
                             font: { weight: 'bold', size: 12 },
-                            color: '#007BFF',
+                            color: '#27AE60',
                             callback: v => 'Rs ' + (v/1000).toFixed(0) + 'k'
                         },
                         title: { display: true, text: 'Gold Price', font: { weight: 'bold' } }
@@ -459,7 +459,7 @@
                         grid: { drawOnChartArea: false },
                         ticks: {
                             font: { weight: 'bold', size: 12 },
-                            color: '#5B9BD5',
+                            color: '#2ECC71',
                             callback: v => 'Rs ' + v
                         },
                         title: { display: true, text: 'Silver Price', font: { weight: 'bold' } }
