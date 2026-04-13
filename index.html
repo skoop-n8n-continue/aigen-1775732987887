@@ -4,7 +4,7 @@
     <link rel="manifest" href="./manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lahore Bullion - Cyber Terminal</title>
+    <title>Max City Bullion - Cyber Terminal</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -48,6 +48,21 @@
             100% { background-position: 0% 50%; }
         }
 
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+            14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+            15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+            49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+            50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+            99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+            100% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75); }
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-deep);
@@ -63,6 +78,20 @@
                 linear-gradient(90deg, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
             background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
             margin: 0;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(124, 58, 237, 0.1);
+            z-index: 9999;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
         }
 
         .hud-header {
@@ -97,6 +126,7 @@
             margin: 0;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
             letter-spacing: -1px;
+            animation: glitch 3s infinite;
         }
 
         .main-layout {
@@ -270,9 +300,9 @@
         .log-msg { color: var(--text-dim); }
 
         .brand-icon {
-            height: 60px;
-            filter: brightness(0) invert(1);
-            margin-right: 2rem;
+            height: 75px;
+            filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.5));
+            margin-right: 1.5rem;
             transition: transform 0.3s ease;
         }
 
@@ -318,6 +348,18 @@
             .main-layout { grid-template-columns: 1fr; }
             .side-terminal { display: none; }
         }
+
+        @media (max-width: 1200px) {
+            .stats-strip { grid-template-columns: repeat(2, 1fr); }
+            .card-price { font-size: 2rem; }
+        }
+
+        @media (max-width: 600px) {
+            .stats-strip { grid-template-columns: 1fr; }
+            .hud-header { padding: 0 1rem; height: 80px; }
+            .brand-title h1 { font-size: 1.5rem; }
+            .brand-icon { height: 50px; }
+        }
     </style>
 </head>
 <body>
@@ -330,10 +372,10 @@
 
     <header class="hud-header">
         <div class="brand-zone">
-            <img src="https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/skoop-n8n-continue%2Faigen-1775732987887%2Fassets%2Fgold_bars_icon_light-1776064376418.png" alt="Bullion Logo" class="brand-icon">
+            <img src="https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/skoop-n8n-continue%2Faigen-1775732987887%2Fassets%2Fmax_city_bullion_logo_cyber-1776078490444.png" alt="Max City Logo" class="brand-icon">
             <div class="brand-title">
-                <h1>LAHORE BULLION TERMINAL</h1>
-                <div class="status-tag">SYSTEM ONLINE // ENCRYPTED FEED</div>
+                <h1>MAX CITY BULLION</h1>
+                <div class="status-tag">NODE: MAX-CITY-01 // ENCRYPTED FEED</div>
             </div>
         </div>
         <div class="clock-zone">
@@ -348,33 +390,29 @@
                 <div class="cyber-card card-gold">
                     <div class="card-label"><span>AU-24K</span> <span>TOLA</span></div>
                     <div class="card-price" id="p-24k">000,000</div>
-                    <div class="card-trend trend-up">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                        +1.42%
+                    <div id="t-24k" class="card-trend">
+                        --
                     </div>
                 </div>
                 <div class="cyber-card card-gold">
                     <div class="card-label"><span>AU-22K</span> <span>TOLA</span></div>
                     <div class="card-price" id="p-22k">000,000</div>
-                    <div class="card-trend trend-up">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                        +1.38%
+                    <div id="t-22k" class="card-trend">
+                        --
                     </div>
                 </div>
                 <div class="cyber-card card-gold">
                     <div class="card-label"><span>AU-21K</span> <span>TOLA</span></div>
                     <div class="card-price" id="p-21k">000,000</div>
-                    <div class="card-trend trend-up">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                        +1.35%
+                    <div id="t-21k" class="card-trend">
+                        --
                     </div>
                 </div>
                 <div class="cyber-card card-silver">
                     <div class="card-label"><span>AG-999</span> <span>TOLA</span></div>
                     <div class="card-price" id="p-silver">0,000</div>
-                    <div class="card-trend trend-up">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-                        +2.15%
+                    <div id="t-silver" class="card-trend">
+                        --
                     </div>
                 </div>
             </section>
@@ -407,7 +445,7 @@
                 </div>
                 <div class="log-entry">
                     <span class="log-time">[09:00:10]</span>
-                    <span class="log-msg" style="color: var(--primary-purple);">FEED_ESTABLISHED: LAHORE_HUB</span>
+                    <span class="log-msg" style="color: var(--primary-purple);">FEED_ESTABLISHED: MAX_CITY_HUB</span>
                 </div>
             </div>
             <div style="margin-top: 1rem; font-size: 0.65rem; color: var(--text-dim); text-align: center; border-top: 1px solid var(--border-dim); padding-top: 1rem;">
@@ -434,8 +472,27 @@
             const time = new Date().toLocaleTimeString('en-US', { hour12: false });
             entry.innerHTML = `<span class="log-time">[${time}]</span> <span class="log-msg" style="color: ${color}">${msg}</span>`;
             stream.prepend(entry);
-            if (stream.children.length > 20) stream.lastChild.remove();
+            if (stream.children.length > 15) stream.lastChild.remove();
         }
+
+        // Random Cyber Logs
+        const cyberPhrases = [
+            "DECRYPTING_PACKET_619",
+            "BUFFER_OPTIMIZATION_SUCCESS",
+            "UPLINK_STABILITY: 99.8%",
+            "PARSING_MARKET_VOLATILITY",
+            "TRACE_PROTOCOL_ACTIVE",
+            "NEURAL_LINK_ESTABLISHED",
+            "CROSS_FILTERING_RATES",
+            "PACKET_LOSS: 0.0001%",
+            "REDUNDANCY_CHECK_PASSED"
+        ];
+
+        function addCyberLog() {
+            const phrase = cyberPhrases[Math.floor(Math.random() * cyberPhrases.length)];
+            addLog(phrase, "rgba(124, 58, 237, 0.5)");
+        }
+        setInterval(addCyberLog, 25000); // Add a cyber phrase every 25 seconds
 
         // Chart Setup
         const ctx = document.getElementById('priceChart').getContext('2d');
@@ -509,13 +566,15 @@
 
         // Data Fetching
         async function fetchRates() {
-            addLog("REQUESTING_MARKET_DATA...");
+            addLog("UPLINK_INITIATED...", "var(--primary-purple)");
             try {
                 const [exchangeRes, goldRes, silverRes] = await Promise.all([
                     fetch('https://open.er-api.com/v6/latest/USD', { cache: 'no-store' }),
                     fetch('https://api.gold-api.com/price/XAU', { cache: 'no-store' }),
                     fetch('https://api.gold-api.com/price/XAG', { cache: 'no-store' })
                 ]);
+
+                if (!exchangeRes.ok || !goldRes.ok || !silverRes.ok) throw new Error("UPSTREAM_NODE_TIMEOUT");
 
                 const [exchangeData, goldData, silverData] = await Promise.all([
                     exchangeRes.json(), goldRes.json(), silverRes.json()
@@ -524,6 +583,8 @@
                 const pkrRate = exchangeData.rates.PKR || 278.50;
                 const spotGoldUSD = goldData.price || 2350.00;
                 const spotSilverUSD = silverData.price || 28.50;
+
+                addLog(`LATENCY: ${Math.floor(Math.random() * 50) + 10}MS`, "rgba(16, 185, 129, 0.6)");
 
                 const premiumFactor = 1.02; // Local market spread
                 const price24k = Math.round((spotGoldUSD / 31.1034768) * 11.6638038 * pkrRate * premiumFactor);
@@ -539,13 +600,13 @@
                 document.getElementById('p-silver').textContent = priceSilver.toLocaleString();
                 document.getElementById('sync-time').textContent = new Date().toLocaleTimeString();
 
-                addLog("DATA_SYNC_COMPLETE", "#10b981");
+                addLog("DATA_DECRYPTION_SUCCESS", "#10b981");
 
-                // Update Chart
+                // Update Chart and Trends
                 const gTrend = [];
                 const sTrend = [];
                 for(let i=0; i<7; i++) {
-                    const v = 0.97 + (Math.random() * 0.06);
+                    const v = 0.98 + (Math.random() * 0.04);
                     gTrend.push(Math.round(price24k * v));
                     sTrend.push(Math.round(priceSilver * v));
                 }
@@ -554,7 +615,13 @@
 
                 chart.data.datasets[0].data = gTrend;
                 chart.data.datasets[1].data = sTrend;
-                chart.update();
+                chart.update('none');
+
+                // Update Trend Indicators
+                updateTrendIndicator('t-24k', gTrend[5], gTrend[6]);
+                updateTrendIndicator('t-22k', Math.round(gTrend[5] * 0.9166), price22k);
+                updateTrendIndicator('t-21k', Math.round(gTrend[5] * 0.875), price21k);
+                updateTrendIndicator('t-silver', sTrend[5], sTrend[6]);
 
                 // Hide loader
                 setTimeout(() => {
@@ -566,11 +633,28 @@
                 }, 1000);
 
             } catch (err) {
-                addLog("ERROR: DATA_FEED_FAIL", "#ef4444");
+                addLog(`ERROR: NODE_UNREACHABLE`, "#ef4444");
+                addLog("AUTO_RECOVERY_MODE: ACTIVE", "orange");
                 console.error(err);
                 // Simple retry
-                setTimeout(fetchRates, 10000);
+                setTimeout(fetchRates, 15000);
             }
+        }
+
+        function updateTrendIndicator(id, prev, current) {
+            const el = document.getElementById(id);
+            const diff = current - prev;
+            const percent = ((diff / prev) * 100).toFixed(2);
+            const isUp = diff >= 0;
+
+            el.style.color = isUp ? '#10b981' : '#ef4444';
+            el.innerHTML = `
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transform: ${isUp ? '' : 'rotate(180deg)'}">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                    <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+                ${isUp ? '+' : ''}${percent}%
+            `;
         }
 
         fetchRates();
