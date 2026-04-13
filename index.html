@@ -19,19 +19,52 @@
 
     <style>
         :root {
-            --neon-pink: #ff00ff;
-            --glow-pink: 0 0 20px rgba(255, 0, 255, 0.5);
             --bg-deep: #05070a;
             --bg-panel: #0d1117;
-            --neon-gold: #ffcc00;
-            --neon-silver: #00f2ff;
-            --neon-green: #39ff14;
-            --neon-red: #ff3131;
+            --rainbow-1: #ff3131;
+            --rainbow-2: #ff8c00;
+            --rainbow-3: #ffcc00;
+            --rainbow-4: #39ff14;
+            --rainbow-5: #00f2ff;
+            --rainbow-6: #007BFF;
+            --rainbow-7: #ff00ff;
             --text-dim: #8b949e;
             --text-bright: #c9d1d9;
             --border-dim: rgba(139, 148, 158, 0.15);
-            --glow-gold: 0 0 15px rgba(255, 204, 0, 0.3);
-            --glow-silver: 0 0 15px rgba(0, 242, 255, 0.3);
+            --glow-rainbow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes rainbow-cycle {
+            0% { border-color: var(--rainbow-1); box-shadow: 0 0 15px var(--rainbow-1); }
+            14% { border-color: var(--rainbow-2); box-shadow: 0 0 15px var(--rainbow-2); }
+            28% { border-color: var(--rainbow-3); box-shadow: 0 0 15px var(--rainbow-3); }
+            42% { border-color: var(--rainbow-4); box-shadow: 0 0 15px var(--rainbow-4); }
+            57% { border-color: var(--rainbow-5); box-shadow: 0 0 15px var(--rainbow-5); }
+            71% { border-color: var(--rainbow-6); box-shadow: 0 0 15px var(--rainbow-6); }
+            85% { border-color: var(--rainbow-7); box-shadow: 0 0 15px var(--rainbow-7); }
+            100% { border-color: var(--rainbow-1); box-shadow: 0 0 15px var(--rainbow-1); }
+        }
+
+        @keyframes rainbow-text {
+            0% { color: var(--rainbow-1); text-shadow: 0 0 10px var(--rainbow-1); }
+            14% { color: var(--rainbow-2); text-shadow: 0 0 10px var(--rainbow-2); }
+            28% { color: var(--rainbow-3); text-shadow: 0 0 10px var(--rainbow-3); }
+            42% { color: var(--rainbow-4); text-shadow: 0 0 10px var(--rainbow-4); }
+            57% { color: var(--rainbow-5); text-shadow: 0 0 10px var(--rainbow-5); }
+            71% { color: var(--rainbow-6); text-shadow: 0 0 10px var(--rainbow-6); }
+            85% { color: var(--rainbow-7); text-shadow: 0 0 10px var(--rainbow-7); }
+            100% { color: var(--rainbow-1); text-shadow: 0 0 10px var(--rainbow-1); }
+        }
+
+        @keyframes rainbow-bg {
+            0% { background: var(--rainbow-1); box-shadow: 0 0 15px var(--rainbow-1); }
+            14% { background: var(--rainbow-2); box-shadow: 0 0 15px var(--rainbow-2); }
+            28% { background: var(--rainbow-3); box-shadow: 0 0 15px var(--rainbow-3); }
+            42% { background: var(--rainbow-4); box-shadow: 0 0 15px var(--rainbow-4); }
+            57% { background: var(--rainbow-5); box-shadow: 0 0 15px var(--rainbow-5); }
+            71% { background: var(--rainbow-6); box-shadow: 0 0 15px var(--rainbow-6); }
+            85% { background: var(--rainbow-7); box-shadow: 0 0 15px var(--rainbow-7); }
+            100% { background: var(--rainbow-1); box-shadow: 0 0 15px var(--rainbow-1); }
         }
 
         * {
@@ -57,7 +90,7 @@
         /* Top HUD */
         .hud-header {
             height: 80px;
-            border-bottom: 2px solid var(--neon-pink);
+            border-bottom: 2px solid var(--rainbow-1);
             background: rgba(13, 17, 23, 0.9);
             backdrop-filter: blur(15px);
             display: flex;
@@ -65,7 +98,19 @@
             align-items: center;
             padding: 0 2rem;
             position: relative;
-            box-shadow: 0 5px 30px rgba(255, 0, 255, 0.1);
+            box-shadow: 0 5px 30px rgba(255, 255, 255, 0.05);
+            animation: rainbow-border-bottom 10s linear infinite;
+        }
+
+        @keyframes rainbow-border-bottom {
+            0% { border-color: var(--rainbow-1); }
+            14% { border-color: var(--rainbow-2); }
+            28% { border-color: var(--rainbow-3); }
+            42% { border-color: var(--rainbow-4); }
+            57% { border-color: var(--rainbow-5); }
+            71% { border-color: var(--rainbow-6); }
+            85% { border-color: var(--rainbow-7); }
+            100% { border-color: var(--rainbow-1); }
         }
 
         .hud-header::after {
@@ -75,8 +120,17 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-pink), var(--neon-gold), var(--neon-pink), transparent);
-            box-shadow: var(--glow-pink);
+            background: linear-gradient(90deg,
+                var(--rainbow-1), var(--rainbow-2), var(--rainbow-3),
+                var(--rainbow-4), var(--rainbow-5), var(--rainbow-6),
+                var(--rainbow-7), var(--rainbow-1));
+            background-size: 200% 100%;
+            animation: rainbow-slide 5s linear infinite;
+        }
+
+        @keyframes rainbow-slide {
+            0% { background-position: 100% 0%; }
+            100% { background-position: -100% 0%; }
         }
 
         .brand-zone {
@@ -88,28 +142,26 @@
         .brand-icon {
             width: 45px;
             height: 45px;
-            border: 2px solid var(--neon-pink);
+            border: 2px solid var(--rainbow-1);
             padding: 5px;
             border-radius: 8px;
-            box-shadow: var(--glow-pink);
-            filter: drop-shadow(0 0 5px var(--neon-pink));
+            animation: rainbow-cycle 8s linear infinite;
         }
 
         .brand-title h1 {
             font-family: 'JetBrains Mono', monospace;
             font-size: 1.5rem;
             letter-spacing: 2px;
-            color: var(--neon-pink);
             text-transform: uppercase;
-            text-shadow: var(--glow-pink);
+            animation: rainbow-text 10s linear infinite;
         }
 
         .status-tag {
             font-size: 0.7rem;
-            background: rgba(57, 255, 20, 0.1);
-            color: var(--neon-green);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
             padding: 2px 8px;
-            border: 1px solid var(--neon-green);
+            border: 1px solid var(--border-dim);
             border-radius: 4px;
             margin-top: 4px;
             display: inline-block;
@@ -123,8 +175,7 @@
         #clock {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--neon-silver);
-            text-shadow: var(--glow-silver);
+            animation: rainbow-text 12s linear infinite reverse;
         }
 
         #date {
@@ -160,6 +211,7 @@
             padding: 1.5rem;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .cyber-card::before {
@@ -171,8 +223,8 @@
             height: 100%;
         }
 
-        .card-gold::before { background: var(--neon-gold); box-shadow: var(--glow-gold); }
-        .card-silver::before { background: var(--neon-silver); box-shadow: var(--glow-silver); }
+        .card-gold::before { animation: rainbow-bg 15s linear infinite; }
+        .card-silver::before { animation: rainbow-bg 15s linear infinite reverse; }
 
         .card-label {
             font-family: 'JetBrains Mono', monospace;
@@ -196,7 +248,7 @@
             gap: 0.4rem;
         }
 
-        .trend-up { color: var(--neon-green); }
+        .trend-up { color: var(--rainbow-4); }
 
         .chart-container {
             flex: 1;
@@ -225,12 +277,11 @@
 
         .term-title {
             font-family: 'JetBrains Mono', monospace;
-            color: var(--neon-pink);
+            animation: rainbow-text 15s linear infinite;
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border-dim);
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.2);
         }
 
         .log-stream {
@@ -248,7 +299,7 @@
             gap: 0.8rem;
         }
 
-        .log-time { color: var(--neon-silver); min-width: 60px; }
+        .log-time { color: var(--rainbow-5); min-width: 60px; }
 
         .scanner-line {
             position: absolute;
@@ -256,15 +307,17 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: rgba(0, 242, 255, 0.1);
+            background: linear-gradient(90deg, transparent, var(--rainbow-5), transparent);
             animation: scan 4s linear infinite;
             z-index: 5;
             pointer-events: none;
         }
 
         @keyframes scan {
-            0% { top: 0%; }
-            100% { top: 100%; }
+            0% { top: 0%; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
         }
 
         #loading-overlay {
@@ -291,7 +344,7 @@
             top: 0;
             left: 0;
             height: 100%;
-            background: var(--neon-gold);
+            background: linear-gradient(90deg, var(--rainbow-1), var(--rainbow-7));
             width: 0%;
             animation: load 2s ease-in-out forwards;
         }
@@ -309,8 +362,8 @@
 </head>
 <body>
     <div id="loading-overlay">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--neon-pink); text-shadow: var(--glow-pink);">INITIALIZING SECURE LINK...</div>
-        <div class="loader-bar"><div class="loader-progress" style="background: var(--neon-pink); box-shadow: var(--glow-pink);"></div></div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; animation: rainbow-text 2s linear infinite;">INITIALIZING RAINBOW TERMINAL...</div>
+        <div class="loader-bar"><div class="loader-progress"></div></div>
     </div>
 
     <header class="hud-header">
@@ -439,23 +492,23 @@
                 datasets: [
                     {
                         label: 'Gold',
-                        borderColor: '#ffcc00',
-                        backgroundColor: 'rgba(255, 204, 0, 0.05)',
-                        borderWidth: 3,
-                        pointRadius: 4,
-                        pointBackgroundColor: '#ffcc00',
-                        tension: 0.3,
+                        borderColor: '#ff3131', // Rainbow Red start
+                        backgroundColor: 'rgba(255, 49, 49, 0.1)',
+                        borderWidth: 4,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#ff8c00', // Rainbow Orange
+                        tension: 0.4,
                         fill: true,
                         data: new Array(7).fill(0),
                         yAxisID: 'y'
                     },
                     {
                         label: 'Silver',
-                        borderColor: '#00f2ff',
-                        borderWidth: 2,
+                        borderColor: '#00f2ff', // Rainbow Cyan
+                        borderWidth: 3,
                         borderDash: [5, 5],
                         pointRadius: 0,
-                        tension: 0.3,
+                        tension: 0.4,
                         fill: false,
                         data: new Array(7).fill(0),
                         yAxisID: 'y1'
@@ -465,12 +518,20 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: '#8b949e',
+                            font: { family: 'JetBrains Mono', size: 10 }
+                        }
+                    }
+                },
                 scales: {
                     y: {
                         position: 'left',
-                        grid: { color: 'rgba(139, 148, 158, 0.05)' },
-                        ticks: { color: '#8b949e', font: { family: 'JetBrains Mono' } }
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#ff3131', font: { family: 'JetBrains Mono' } }
                     },
                     y1: {
                         position: 'right',
