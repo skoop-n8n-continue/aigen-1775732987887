@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js?v=m00n1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js?v=m00n2"></script>
 
     <style>
         :root {
@@ -59,6 +59,37 @@
             50% { transform: translateY(-10px) rotate(2deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
+
+        /* Shooting Stars */
+        .shooting-star {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 2px;
+            background: linear-gradient(-45deg, var(--primary-yellow), rgba(0, 0, 255, 0));
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px var(--primary-yellow));
+            animation: tail 3s ease-in-out infinite, shooting 3s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes tail {
+            0% { width: 0; }
+            30% { width: 100px; }
+            100% { width: 0; }
+        }
+
+        @keyframes shooting {
+            0% { transform: translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateX(300px); opacity: 0; }
+        }
+
+        .shooting-star:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+        .shooting-star:nth-child(2) { top: 30%; left: 60%; animation-delay: 5s; }
+        .shooting-star:nth-child(3) { top: 50%; left: 10%; animation-delay: 2s; }
+        .shooting-star:nth-child(4) { top: 70%; left: 80%; animation-delay: 8s; }
+        .shooting-star:nth-child(5) { top: 15%; left: 40%; animation-delay: 4s; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -358,6 +389,11 @@
     </style>
 </head>
 <body>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
     <div id="loading-overlay">
         <img src="https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/skoop-n8n-continue%2Faigen-1775732987887%2Fassets%2Fglowing_moon_icon-1776084110345.png" style="width: 120px; animation: moon-float 3s infinite;" alt="Loading Moon">
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 800; letter-spacing: 8px; color: var(--primary-yellow);">LUNAR_SYNC_INIT</div>
@@ -371,7 +407,7 @@
             <img src="https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/skoop-n8n-continue%2Faigen-1775732987887%2Fassets%2Fglowing_moon_icon-1776084110345.png" alt="Max City Moon Logo" class="brand-icon">
             <div class="brand-title">
                 <h1>MAX CITY</h1>
-                <div class="status-tag">LUNAR STATION: MC-01 // GOLD_FEEDS: ACTIVE</div>
+                <div class="status-tag">LUNAR STATION: MC-01 // PHASE: <span id="moon-phase-name">CALCULATING...</span></div>
             </div>
         </div>
         <div class="clock-zone">
@@ -644,37 +680,35 @@
             `;
         }
 
-        fetchRates();
-        setInterval(fetchRates, 300000);
-    </script>
+        // Moon Phase Calculation
+        function updateMoonPhase() {
+            const date = new Date();
+            const synodicMonth = 29.530588853;
+            const knownNewMoon = new Date("2000-01-06T18:14:00Z");
+            const diffInMs = date - knownNewMoon;
+            const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+            const phase = ((diffInDays / synodicMonth) % 1 + 1) % 1;
 
-        function updateTrendIndicator(id, prev, current) {
-            const el = document.getElementById(id);
-            const diff = current - prev;
-            const percent = ((diff / prev) * 100).toFixed(2);
-            const isUp = diff >= 0;
+            let name = "";
+            let icon = "🌕";
 
-            el.style.color = isUp ? '#10b981' : '#ef4444';
-            el.innerHTML = `
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transform: ${isUp ? '' : 'rotate(180deg)'}">
-                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                    <polyline points="17 6 23 6 23 12"></polyline>
-                </svg>
-                ${isUp ? '+' : ''}${percent}%
-            `;
+            if (phase < 0.03 || phase > 0.97) { name = "New Moon"; icon = "🌑"; }
+            else if (phase < 0.22) { name = "Waxing Crescent"; icon = "🌒"; }
+            else if (phase < 0.28) { name = "First Quarter"; icon = "🌓"; }
+            else if (phase < 0.47) { name = "Waxing Gibbous"; icon = "🌔"; }
+            else if (phase < 0.53) { name = "Full Moon"; icon = "🌕"; }
+            else if (phase < 0.72) { name = "Waning Gibbous"; icon = "🌖"; }
+            else if (phase < 0.78) { name = "Last Quarter"; icon = "🌗"; }
+            else { name = "Waning Crescent"; icon = "🌘"; }
+
+            document.getElementById('moon-phase-name').textContent = `${name} ${icon}`;
+            addLog(`LUNAR_PHASE_UPDATE: ${name.toUpperCase()}`, "rgba(250, 204, 21, 0.4)");
         }
 
+        updateMoonPhase();
         fetchRates();
         setInterval(fetchRates, 300000);
+        setInterval(updateMoonPhase, 3600000); // Update every hour
     </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./sw.js')
-          .then(function (reg) { console.log('[PWA] SW registered:', reg.scope); })
-          .catch(function (err) { console.warn('[PWA] SW registration failed:', err); });
-      });
-    }
-  </script>
 </body>
 </html>
