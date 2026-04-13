@@ -20,299 +20,217 @@
     <style>
         :root {
             --bg-deep: #ffffff;
-            --bg-panel: #f8fafc;
-            --rainbow-1: #e11d48;
-            --rainbow-2: #ea580c;
-            --rainbow-3: #ca8a04;
-            --rainbow-4: #16a34a;
-            --rainbow-5: #0284c7;
-            --rainbow-6: #2563eb;
-            --rainbow-7: #c026d3;
-            --text-dim: #94a3b8;
-            --text-bright: #475569;
-            --border-dim: rgba(226, 232, 240, 0.6);
-            --glow-rainbow: 0 0 30px rgba(226, 232, 240, 0.4);
+            --bg-panel: #ffffff;
+            --rainbow-1: #ff0055;
+            --rainbow-2: #ff5500;
+            --rainbow-3: #ffcc00;
+            --rainbow-4: #00ff66;
+            --rainbow-5: #00ccff;
+            --rainbow-6: #5500ff;
+            --rainbow-7: #ff00ff;
+            --text-dim: #64748b;
+            --text-bright: #1e293b;
+            --border-dim: rgba(226, 232, 240, 0.8);
+            --glow-rainbow: 0 0 40px rgba(0, 204, 255, 0.3);
         }
 
         @keyframes rainbow-border {
-            0% { border-color: var(--rainbow-1); }
-            14% { border-color: var(--rainbow-2); }
-            28% { border-color: var(--rainbow-3); }
-            42% { border-color: var(--rainbow-4); }
-            57% { border-color: var(--rainbow-5); }
-            71% { border-color: var(--rainbow-6); }
-            85% { border-color: var(--rainbow-7); }
-            100% { border-color: var(--rainbow-1); }
+            0% { border-color: var(--rainbow-1); box-shadow: 0 0 10px var(--rainbow-1); }
+            14% { border-color: var(--rainbow-2); box-shadow: 0 0 10px var(--rainbow-2); }
+            28% { border-color: var(--rainbow-3); box-shadow: 0 0 10px var(--rainbow-3); }
+            42% { border-color: var(--rainbow-4); box-shadow: 0 0 10px var(--rainbow-4); }
+            57% { border-color: var(--rainbow-5); box-shadow: 0 0 10px var(--rainbow-5); }
+            71% { border-color: var(--rainbow-6); box-shadow: 0 0 10px var(--rainbow-6); }
+            85% { border-color: var(--rainbow-7); box-shadow: 0 0 10px var(--rainbow-7); }
+            100% { border-color: var(--rainbow-1); box-shadow: 0 0 10px var(--rainbow-1); }
         }
 
         @keyframes rainbow-glow {
-            0% { box-shadow: 0 0 20px var(--rainbow-1); }
-            14% { box-shadow: 0 0 20px var(--rainbow-2); }
-            28% { box-shadow: 0 0 20px var(--rainbow-3); }
-            42% { box-shadow: 0 0 20px var(--rainbow-4); }
-            57% { box-shadow: 0 0 20px var(--rainbow-5); }
-            71% { box-shadow: 0 0 20px var(--rainbow-6); }
-            85% { box-shadow: 0 0 20px var(--rainbow-7); }
-            100% { box-shadow: 0 0 20px var(--rainbow-1); }
+            0% { box-shadow: 0 0 30px var(--rainbow-1); }
+            14% { box-shadow: 0 0 30px var(--rainbow-2); }
+            28% { box-shadow: 0 0 30px var(--rainbow-3); }
+            42% { box-shadow: 0 0 30px var(--rainbow-4); }
+            57% { box-shadow: 0 0 30px var(--rainbow-5); }
+            71% { box-shadow: 0 0 30px var(--rainbow-6); }
+            85% { box-shadow: 0 0 30px var(--rainbow-7); }
+            100% { box-shadow: 0 0 30px var(--rainbow-1); }
         }
 
-        @keyframes rainbow-cycle {
-            0% { border-color: var(--rainbow-1); box-shadow: 0 0 15px var(--rainbow-1); }
-            14% { border-color: var(--rainbow-2); box-shadow: 0 0 15px var(--rainbow-2); }
-            28% { border-color: var(--rainbow-3); box-shadow: 0 0 15px var(--rainbow-3); }
-            42% { border-color: var(--rainbow-4); box-shadow: 0 0 15px var(--rainbow-4); }
-            57% { border-color: var(--rainbow-5); box-shadow: 0 0 15px var(--rainbow-5); }
-            71% { border-color: var(--rainbow-6); box-shadow: 0 0 15px var(--rainbow-6); }
-            85% { border-color: var(--rainbow-7); box-shadow: 0 0 15px var(--rainbow-7); }
-            100% { border-color: var(--rainbow-1); box-shadow: 0 0 15px var(--rainbow-1); }
+        @keyframes rainbow-text-vibrant {
+            0% { color: var(--rainbow-1); filter: drop-shadow(0 0 5px var(--rainbow-1)); }
+            14% { color: var(--rainbow-2); filter: drop-shadow(0 0 5px var(--rainbow-2)); }
+            28% { color: var(--rainbow-3); filter: drop-shadow(0 0 5px var(--rainbow-3)); }
+            42% { color: var(--rainbow-4); filter: drop-shadow(0 0 5px var(--rainbow-4)); }
+            57% { color: var(--rainbow-5); filter: drop-shadow(0 0 5px var(--rainbow-5)); }
+            71% { color: var(--rainbow-6); filter: drop-shadow(0 0 5px var(--rainbow-6)); }
+            85% { color: var(--rainbow-7); filter: drop-shadow(0 0 5px var(--rainbow-7)); }
+            100% { color: var(--rainbow-1); filter: drop-shadow(0 0 5px var(--rainbow-1)); }
         }
 
-        @keyframes rainbow-text {
-            0% { color: var(--rainbow-1); text-shadow: 0 0 10px var(--rainbow-1); }
-            14% { color: var(--rainbow-2); text-shadow: 0 0 10px var(--rainbow-2); }
-            28% { color: var(--rainbow-3); text-shadow: 0 0 10px var(--rainbow-3); }
-            42% { color: var(--rainbow-4); text-shadow: 0 0 10px var(--rainbow-4); }
-            57% { color: var(--rainbow-5); text-shadow: 0 0 10px var(--rainbow-5); }
-            71% { color: var(--rainbow-6); text-shadow: 0 0 10px var(--rainbow-6); }
-            85% { color: var(--rainbow-7); text-shadow: 0 0 10px var(--rainbow-7); }
-            100% { color: var(--rainbow-1); text-shadow: 0 0 10px var(--rainbow-1); }
-        }
-
-        @keyframes rainbow-bg {
-            0% { background: var(--rainbow-1); box-shadow: 0 0 15px var(--rainbow-1); }
-            14% { background: var(--rainbow-2); box-shadow: 0 0 15px var(--rainbow-2); }
-            28% { background: var(--rainbow-3); box-shadow: 0 0 15px var(--rainbow-3); }
-            42% { background: var(--rainbow-4); box-shadow: 0 0 15px var(--rainbow-4); }
-            57% { background: var(--rainbow-5); box-shadow: 0 0 15px var(--rainbow-5); }
-            71% { background: var(--rainbow-6); box-shadow: 0 0 15px var(--rainbow-6); }
-            85% { background: var(--rainbow-7); box-shadow: 0 0 15px var(--rainbow-7); }
-            100% { background: var(--rainbow-1); box-shadow: 0 0 15px var(--rainbow-1); }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @keyframes background-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-deep);
+            background-color: #ffffff;
             color: var(--text-bright);
             height: 100vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             background-image:
-                linear-gradient(var(--border-dim) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border-dim) 1px, transparent 1px);
-            background-size: 40px 40px;
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 85, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 204, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 204, 0, 0.05) 0%, transparent 60%),
+                linear-gradient(rgba(226, 232, 240, 0.5) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(226, 232, 240, 0.5) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
         }
 
-        /* Top HUD */
         .hud-header {
-            height: 80px;
-            border-bottom: 2px solid var(--rainbow-1);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
+            height: 90px;
+            background: linear-gradient(-45deg, #ff0055, #ff5500, #ffcc00, #00ff66, #00ccff, #5500ff, #ff00ff);
+            background-size: 400% 400%;
+            animation: background-shift 15s ease infinite;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            padding: 0 3rem;
             position: relative;
-            box-shadow: 0 5px 30px rgba(100, 116, 139, 0.1);
-            animation: rainbow-border-bottom 10s linear infinite;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border-bottom: none;
         }
 
-        @keyframes rainbow-border-bottom {
-            0% { border-color: var(--rainbow-1); }
-            14% { border-color: var(--rainbow-2); }
-            28% { border-color: var(--rainbow-3); }
-            42% { border-color: var(--rainbow-4); }
-            57% { border-color: var(--rainbow-5); }
-            71% { border-color: var(--rainbow-6); }
-            85% { border-color: var(--rainbow-7); }
-            100% { border-color: var(--rainbow-1); }
-        }
-
-        .hud-header::after {
+        .hud-header::before {
             content: '';
             position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg,
-                var(--rainbow-1), var(--rainbow-2), var(--rainbow-3),
-                var(--rainbow-4), var(--rainbow-5), var(--rainbow-6),
-                var(--rainbow-7), var(--rainbow-1));
-            background-size: 200% 100%;
-            animation: rainbow-slide 5s linear infinite;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1;
         }
 
-        @keyframes rainbow-slide {
-            0% { background-position: 100% 0%; }
-            100% { background-position: -100% 0%; }
-        }
-
-        .brand-zone {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-        }
-
-        .brand-icon {
-            width: 45px;
-            height: 45px;
-            border: 2px solid var(--rainbow-1);
-            padding: 5px;
-            border-radius: 8px;
-            animation: rainbow-cycle 8s linear infinite;
+        .hud-header > * {
+            position: relative;
+            z-index: 2;
         }
 
         .brand-title h1 {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            animation: rainbow-text 10s linear infinite;
-        }
-
-        .status-tag {
-            font-size: 0.7rem;
-            background: rgba(148, 163, 184, 0.1);
-            color: var(--text-dim);
-            padding: 2px 8px;
-            border: 1px solid var(--border-dim);
-            border-radius: 4px;
-            margin-top: 4px;
-            display: inline-block;
-        }
-
-        .clock-zone {
-            text-align: right;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        #clock {
             font-size: 1.8rem;
-            font-weight: 800;
-            animation: rainbow-text 12s linear infinite reverse;
-        }
-
-        #date {
-            font-size: 0.8rem;
-            color: var(--text-dim);
+            font-weight: 900;
+            letter-spacing: -1px;
             text-transform: uppercase;
-        }
-
-        /* Main Grid */
-        .main-layout {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 1.5rem;
-            padding: 1.5rem;
-        }
-
-        .visual-core {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .stats-strip {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.2rem;
+            background: linear-gradient(90deg, #ff0055, #ffcc00, #00ccff, #ff0055);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: background-shift 5s linear infinite;
         }
 
         .cyber-card {
-            background: var(--bg-panel);
-            border: 2px solid var(--border-dim);
-            padding: 1.5rem;
+            background: white;
+            border: 3px solid transparent;
+            padding: 1.8rem;
+            border-radius: 16px;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            animation: rainbow-border 15s linear infinite;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: rainbow-border 8s linear infinite, rainbow-glow 8s linear infinite;
         }
 
-        .cyber-card:hover {
-            animation: rainbow-border 3s linear infinite, rainbow-glow 3s linear infinite;
-            transform: translateY(-5px);
-            z-index: 10;
-        }
-
-        .cyber-card::before {
+        .cyber-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
-            height: 100%;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--rainbow-1), var(--rainbow-3), var(--rainbow-5), var(--rainbow-7));
+            background-size: 200% 100%;
+            animation: background-shift 3s linear infinite;
         }
 
-        .card-gold::before { animation: rainbow-bg 15s linear infinite; }
-        .card-silver::before { animation: rainbow-bg 15s linear infinite reverse; }
-
-        .card-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
+        .cyber-card:hover {
+            transform: scale(1.08) translateY(-10px);
+            z-index: 20;
         }
 
         .card-price {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 0.2rem;
+            letter-spacing: -2px;
+            color: var(--text-bright);
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
         }
 
-        .card-trend {
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+        .card-price::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rainbow-1), var(--rainbow-4));
+            border-radius: 2px;
+            margin-top: -5px;
         }
-
-        .trend-up { color: var(--rainbow-4); }
 
         .chart-container {
             flex: 1;
-            background: rgba(248, 250, 252, 0.5);
-            border: 2px solid var(--border-dim);
-            padding: 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 3px solid transparent;
+            border-radius: 24px;
+            padding: 2.5rem;
             position: relative;
-            animation: rainbow-border 20s linear infinite reverse;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            animation: rainbow-border 12s linear infinite reverse, rainbow-glow 12s linear infinite reverse;
         }
 
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Side Panel */
         .side-terminal {
-            background: rgba(248, 250, 252, 0.8);
-            border: 2px solid var(--border-dim);
+            background: white;
+            border: 3px solid transparent;
+            border-radius: 24px;
             display: flex;
             flex-direction: column;
-            padding: 1.5rem;
-            animation: rainbow-border 25s linear infinite;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            animation: rainbow-border 15s linear infinite;
         }
 
-        .term-title {
-            font-family: 'JetBrains Mono', monospace;
-            animation: rainbow-text 15s linear infinite;
+        .status-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff0055, #ffcc00, #00ccff);
+            background-size: 200% 100%;
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-top: 8px;
+            display: inline-block;
+            animation: background-shift 3s linear infinite;
+            box-shadow: 0 4px 10px rgba(255, 0, 85, 0.3);
+        }
+
+        #clock {
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ff0055, #ffcc00, #00ccff, #ff0055);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: background-shift 5s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(255, 0, 85, 0.2));
+        }
+
+        #date {
             font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-dim);
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .log-stream {
@@ -337,12 +255,17 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--rainbow-5), transparent);
-            opacity: 0.3;
-            animation: scan 4s linear infinite;
+            height: 4px;
+            background: linear-gradient(90deg,
+                transparent,
+                #ff0055, #ffcc00, #00ff66, #00ccff, #ff00ff,
+                transparent);
+            background-size: 200% 100%;
+            opacity: 0.6;
+            animation: scan 3s linear infinite, background-shift 2s linear infinite;
             z-index: 5;
             pointer-events: none;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
         }
 
         @keyframes scan {
@@ -394,8 +317,10 @@
 </head>
 <body>
     <div id="loading-overlay">
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; animation: rainbow-text 2s linear infinite;">INITIALIZING RAINBOW TERMINAL...</div>
-        <div class="loader-bar"><div class="loader-progress"></div></div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 900; letter-spacing: 5px; animation: rainbow-text-vibrant 1s linear infinite;">VIBRANT RAINBOW BOOT...</div>
+        <div class="loader-bar" style="height: 10px; width: 400px; border-radius: 5px; overflow: hidden; background: #f0f0f0;">
+            <div class="loader-progress" style="background: linear-gradient(90deg, #ff0055, #ffcc00, #00ccff, #ff00ff); background-size: 200% 100%; animation: load 2s ease-in-out forwards, background-shift 1s linear infinite;"></div>
+        </div>
     </div>
 
     <header class="hud-header">
@@ -524,11 +449,11 @@
                 datasets: [
                     {
                         label: 'Gold',
-                        borderColor: '#e11d48', // Rainbow Red
-                        backgroundColor: 'rgba(225, 29, 72, 0.05)',
-                        borderWidth: 4,
-                        pointRadius: 6,
-                        pointBackgroundColor: '#ea580c', // Rainbow Orange
+                        borderColor: '#ff0055', // Hot Pink
+                        backgroundColor: 'rgba(255, 0, 85, 0.15)',
+                        borderWidth: 6,
+                        pointRadius: 8,
+                        pointBackgroundColor: '#ffcc00', // Bright Gold
                         tension: 0.4,
                         fill: true,
                         data: new Array(7).fill(0),
@@ -536,11 +461,11 @@
                     },
                     {
                         label: 'Silver',
-                        borderColor: '#0284c7', // Rainbow Blue
-                        borderWidth: 3,
+                        borderColor: '#00ccff', // Electric Cyan
+                        borderWidth: 4,
                         borderDash: [5, 5],
-                        pointRadius: 0,
-                        tension: 0.4,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#ffffff',
                         fill: false,
                         data: new Array(7).fill(0),
                         yAxisID: 'y1'
@@ -554,21 +479,21 @@
                     legend: {
                         display: true,
                         labels: {
-                            color: '#64748b',
-                            font: { family: 'JetBrains Mono', size: 10 }
+                            color: '#1e293b',
+                            font: { family: 'JetBrains Mono', size: 12, weight: 'bold' }
                         }
                     }
                 },
                 scales: {
                     y: {
                         position: 'left',
-                        grid: { color: 'rgba(226, 232, 240, 0.8)' },
-                        ticks: { color: '#e11d48', font: { family: 'JetBrains Mono' } }
+                        grid: { color: 'rgba(226, 232, 240, 0.4)' },
+                        ticks: { color: '#ff0055', font: { family: 'JetBrains Mono', weight: 'bold' } }
                     },
                     y1: {
                         position: 'right',
                         grid: { display: false },
-                        ticks: { color: '#0284c7', font: { family: 'JetBrains Mono' } }
+                        ticks: { color: '#00ccff', font: { family: 'JetBrains Mono', weight: 'bold' } }
                     },
                     x: {
                         grid: { display: false },
